@@ -49,15 +49,15 @@ fun parseJson(json: String): List<Brush> {
 
         item.X.forEachIndexed { index, x ->
             val penInfo = InputManager.PenInfo(
-                pointerType = InputManager.PointerType.PEN_TIP,
-                x = x,
-                y = item.Y[index],
-                timestamp = initialTimestamp + item.T[index],
-                pressure = item.F[index],
-                orientation = 0f,
-                tilt = 0f,
-                primaryButtonState = false,
-                secondaryButtonState = false
+                InputManager.PointerType.PEN_TIP,
+                x,
+                item.Y[index],
+              initialTimestamp + item.T[index],
+                 item.F[index],
+//                orientation = 0f,
+//                tilt = 0f,
+//                primaryButtonState = false,
+//                secondaryButtonState = false
             )
             stroke.addPoint(penInfo)
         }

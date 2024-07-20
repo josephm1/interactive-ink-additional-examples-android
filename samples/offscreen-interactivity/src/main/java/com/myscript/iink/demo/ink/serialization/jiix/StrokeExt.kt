@@ -53,15 +53,15 @@ fun List<PointerEvent>.toBrush(converter: DisplayMetricsConverter?): InkView.Bru
             map { pointerEvent ->
                 extendedStroke.addPoint(
                     InputManager.PenInfo(
-                        pointerType = InputManager.PointerType.PEN_TIP,
-                        x = converter?.x_mm2px(pointerEvent.x) ?: pointerEvent.x,
-                        y = converter?.y_mm2px(pointerEvent.y) ?: pointerEvent.y,
-                        timestamp = pointerEvent.t,
-                        pressure = pointerEvent.f,
-                        orientation = 0f,
-                        tilt = 0f,
-                        primaryButtonState = false,
-                        secondaryButtonState = false
+                        InputManager.PointerType.PEN_TIP,
+                         converter?.x_mm2px(pointerEvent.x) ?: pointerEvent.x,
+                        converter?.y_mm2px(pointerEvent.y) ?: pointerEvent.y,
+                         pointerEvent.t,
+                         pointerEvent.f,
+//                        orientation = 0f,
+//                        tilt = 0f,
+//                        primaryButtonState = false,
+//                        secondaryButtonState = false
                     )
                 )
             }

@@ -49,7 +49,7 @@ class InkView constructor(
     // attributes
     private var enablePressure = false
     private var minStrokeWidth = 1f
-    private var maxStrokeWidth = 10f
+    private var maxStrokeWidth = 2f
 
     // properties
     var color = Color.GRAY

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnLayout
 import androidx.core.view.isVisible
 import com.microsoft.device.ink.InkView
+import com.microsoft.device.ink.InputManagerHolder
 import com.myscript.iink.offscreen.demo.databinding.MainActivityBinding
 
 class MainActivity : AppCompatActivity() {
@@ -39,10 +40,14 @@ class MainActivity : AppCompatActivity() {
         // If we do not account for this delay, the ViewModel may transmit the strokes prematurely,
         // at a time when the canvas is not yet available.
         binding.inkView.doOnLayout {
+
             // Be aware that calling drawStrokes in this context may not be optimal for performance,
             // as it triggers a complete redraw with each LiveData update.
             // While this method serves as a quick demonstration of how strokes are drawn, your application should be designed to handle this more efficiently
             inkViewModel.strokes.observe(this, binding.inkView::drawStrokes)
+
+
+
         }
         inkViewModel.recognitionFeedback.observe(this, ::onRecognitionUpdate)
         inkViewModel.iinkModel.observe(this, ::onIInkModelUpdate)
@@ -54,13 +59,19 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
             inkView.strokesListener = StrokesListener()
-            undoBtn.setOnClickListener { inkViewModel.undo() }
+            undoBtn.setOnClickListener { inkViewModel.undo()
+                InputManagerHolder.disableRawDrawing()
+            }
             redoBtn.setOnClickListener { inkViewModel.redo() }
             clearInkBtn.setOnClickListener { inkViewModel.clearInk() }
             recognitionSwitch.setOnCheckedChangeListener { _, isChecked ->
                 inkViewModel.toggleRecognition(isVisible = isChecked)
+                InputManagerHolder.enableRawDrawing()
+                InputManagerHolder.disableRawDrawing()
+                InputManagerHolder.enableRawDrawing()
             }
             iinkModelPreviewSwitch.setOnCheckedChangeListener { _, isChecked ->
+
                 iinkModelPreviewLayout.isVisible = isChecked
             }
         }

@@ -3,8 +3,18 @@ import org.apache.commons.io.filefilter.FileFilterUtils
 
 buildscript {
     repositories {
+        maven {
+            url 'http://repo.boox.com/repository/proxy-public/'
+            allowInsecureProtocol true
+        }
+        maven {
+            url "http://repo.boox.com/repository/maven-public/"
+            allowInsecureProtocol true
+
+        }
         google()
         mavenCentral()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
@@ -97,8 +107,14 @@ subprojects {
 
 allprojects {
     repositories {
-        google()
-        mavenCentral()
+//    google()
+//        mavenCentral()
+//        maven {
+//            url "http://repo.boox.com/repository/maven-public/"
+//            allowInsecureProtocol = true
+//        }
+//        maven { url "https://jitpack.io" }
+//
     }
 
     ext {
